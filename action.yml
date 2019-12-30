@@ -13,3 +13,5 @@ inputs:
 runs:
   using: 'node12'
   main: 'dist/index.js'
+icon: book-open
+color: '#FFFF00'
