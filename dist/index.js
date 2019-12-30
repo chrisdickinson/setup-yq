@@ -1031,7 +1031,7 @@ async function main () {
       toolPath = await cache.cacheFile(downloadPath, 'yq', 'yq', version)
     }
 
-    await fs.chmod(path.join(toolPath, 'yq'), 0o755) // just in case we haven't preserved the executable bit
+    await chmod(path.join(toolPath, 'yq'), 0o755) // just in case we haven't preserved the executable bit
     core.addPath(toolPath)
   } catch (error) {
     core.setFailed(error.message)
