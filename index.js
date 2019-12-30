@@ -1,9 +1,14 @@
 'use strict'
 
+const { promisify } = require('util')
+const path = require('path')
 const os = require('os')
+const fs = require('fs')
 
 const cache = require('@actions/tool-cache')
 const core = require('@actions/core')
+
+const chmod = promisify(fs.chmod)
 
 if (require.main === module) {
   main().catch(err => {
@@ -38,6 +43,7 @@ async function main () {
       toolPath = await cache.cacheFile(downloadPath, 'yq', 'yq', version)
     }
 
+    await fs.chmod(path.join(toolPath, 'yq'), 0o755) // just in case we haven't preserved the executable bit
     core.addPath(toolPath)
   } catch (error) {
     core.setFailed(error.message)

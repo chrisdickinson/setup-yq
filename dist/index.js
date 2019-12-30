@@ -988,10 +988,15 @@ module.exports = require("os");
 "use strict";
 
 
+const { promisify } = __webpack_require__(669)
+const path = __webpack_require__(622)
 const os = __webpack_require__(87)
+const fs = __webpack_require__(747)
 
 const cache = __webpack_require__(533)
 const core = __webpack_require__(470)
+
+const chmod = promisify(fs.chmod)
 
 if (require.main === require.cache[eval('__filename')]) {
   main().catch(err => {
@@ -1026,6 +1031,7 @@ async function main () {
       toolPath = await cache.cacheFile(downloadPath, 'yq', 'yq', version)
     }
 
+    await fs.chmod(path.join(toolPath, 'yq'), 0o755) // just in case we haven't preserved the executable bit
     core.addPath(toolPath)
   } catch (error) {
     core.setFailed(error.message)
