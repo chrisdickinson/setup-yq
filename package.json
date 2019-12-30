@@ -9,7 +9,7 @@
   },
   "keywords": [],
   "author": "Chris Dickinson <chris@neversaw.us> (http://neversaw.us/)",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "dependencies": {
     "@actions/core": "^1.2.0",
     "@actions/tool-cache": "^1.1.2"
