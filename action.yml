@@ -12,4 +12,4 @@ inputs:
     default: 'https://github.com/mikefarah/yq/releases/download/{version}/yq_{platform}_{arch}'
 runs:
   using: 'node12'
-  main: 'index.js'
+  main: 'dist/index.js'
