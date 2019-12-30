@@ -16,15 +16,15 @@ async function main () {
   try {
     const url = core.getInput('yq-url')
     const version = core.getInput('yq-version')
-    let toolPath = cache.find('yq', version)
+    const platform = os.platform()
+    let arch = os.arch()
+    if (arch === 'x64') {
+      arch = 'amd64'
+    }
+
+    let toolPath = cache.find('yq', version, arch)
 
     if (!toolPath) {
-      const platform = os.platform()
-      let arch = os.arch()
-      if (arch === 'x64') {
-        arch = 'amd64'
-      }
-
       const context = {
         arch,
         platform,
@@ -35,8 +35,7 @@ async function main () {
       })
 
       const downloadPath = await cache.downloadTool(rendered)
-      await cache.cacheDir(downloadPath, 'yq', version)
-      toolPath = downloadPath
+      toolPath = await cache.cacheFile(downloadPath, 'yq', 'yq', version)
     }
 
     core.addPath(toolPath)
