@@ -11,7 +11,7 @@ inputs:
     required: false
     default: 'https://github.com/mikefarah/yq/releases/download/{version}/yq_{platform}_{arch}'
 runs:
-  using: 'node12'
+  using: 'node16'
   main: 'dist/index.js'
 icon: book-open
 color: '#FFFF00'
